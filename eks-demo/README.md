@@ -6,13 +6,23 @@ If you following the code here, you can try follow the steps bellow:
 
 ## Setting up your terraform config
 
-1. Copy this repo to your local directory, and cd into this folder
-2. `mv terraform.tfvars.examples terraform.tfvars` and edit it with your AWS keys.
-3. Before continuing, make sure you have create a new user (other than the
+1. Before continuing, make sure you have create a new user (other than the
   root user of your AWS account) in IAM, giving it enough permissions.
   For simplicity you can just assign `AdministratorAccess` to the group this user
   belongs to. With more detailed permissions, you will have to be sure you also have
   `AmazonEKSClusterPolicy` and `AmazonEKSServicePolicy` for this user.
+1. Use editor to open file `~/.aws/credentials` and edit it with your AWS keys associated with the user mentioned above such as:
+    ```ini
+    [default]
+    aws_access_key_id = XXX
+    aws_secret_access_key = XXX
+    ```
+1. Copy the repo above to your local directory, and cd into the folder `eks-demo`
+    ```
+    git clone git@github.com:liufuyang/terraform-course.git
+
+    cd eks-demo
+    ```
 
 ## Download kubectl
 ```
@@ -56,16 +66,16 @@ terraform output config-map-aws-auth > .config/config-map-aws-auth.yaml # save o
 kubectl apply -f .config/config-map-aws-auth.yaml
 ```
 
-## See nodes coming up
+## See services and nodes coming up
 ```
+kubectl get svc
+
 kubectl get nodes
 ```
 
-More info [here](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
+More info see [here](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
 
 ## Deploy the Dashboard
-
-More info [here](https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html).
 
 ### Step 1: Deploy the Dashboard
 
@@ -94,6 +104,8 @@ kubectl proxy
 Then open http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
 
 And use the token output from previous command to login.
+
+More info [here](https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html).
 
 
 ## Destroy
