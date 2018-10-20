@@ -52,9 +52,10 @@ terraform apply
 ```
 
 ## Configure kubectl
+(Continue here, or run script `init_kube.sh`, then go to `Step 4: Connect to the Dashboard`)
 ```
 mkdir .config
-terraform output kubeconfig > .config/ekskubeconfig # save output in ~/.kube/config or use the following env prarm
+terraform output kubeconfig > .config/ekskubeconfig # save output in ~/.kube/config or use the following env param
 
 export  KUBECONFIG=$KUBECONFIG:$(pwd)/.config/ekskubeconfig
 ```
@@ -94,7 +95,13 @@ kubectl apply -f eks-admin-service-account.yaml
 kubectl apply -f eks-admin-cluster-role-binding.yaml
 ```
 
-### Step 3: Connect to the Dashboard
+#### Step 3: Create an AWS storage class for your Amazon EKS cluster
+```
+kubectl create -f gp2-storage-class.yaml
+kubectl get storageclass
+```
+
+### Step 4: Connect to the Dashboard
 ```
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}')
 
