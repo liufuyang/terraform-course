@@ -24,4 +24,6 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 
 kubectl proxy &
 
+echo 'Remember to setup your terminal env for kubectl: $ export  KUBECONFIG=$KUBECONFIG:$(pwd)/.config/ekskubeconfig'
+
 open http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
