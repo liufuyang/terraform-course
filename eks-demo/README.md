@@ -26,17 +26,28 @@ If you following the code here, you can try follow the steps bellow:
 
 ## Download kubectl
 ```
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+# For macOS
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
+
+# For linux
+# curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+
 chmod +x kubectl
+
 ln -s $(pwd)/kubectl /usr/local/bin/kubectl
 ```
 
 ## Download the aws-iam-authenticator
 ```
-wget https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.3.0/heptio-authenticator-aws_0.3.0_linux_amd64
-chmod +x heptio-authenticator-aws_0.3.0_linux_amd64
+# For macOS
+wget -O heptio-authenticator-aws https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.3.0/heptio-authenticator-aws_0.3.0_darwin_amd64 
 
-ln -s $(pwd)/heptio-authenticator-aws_0.3.0_linux_amd64 /usr/local/bin/heptio-authenticator-aws
+# For linux
+# wget -O heptio-authenticator-aws https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.3.0/heptio-authenticator-aws_0.3.0_linux_amd64
+
+chmod +x heptio-authenticator-aws
+
+ln -s $(pwd)/heptio-authenticator-aws /usr/local/bin/heptio-authenticator-aws
 ```
 
 ## Modify providers.tf

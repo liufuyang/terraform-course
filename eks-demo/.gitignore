@@ -1,2 +1,4 @@
 .config
 .terraform.tfstate.lock.info
+heptio-authenticator-aws
+kubectl
